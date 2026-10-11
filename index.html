@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#f7f9f5">
+  <meta name="description"
+        content="EcoBite connects restaurants with communities to rescue surplus food and reduce food waste.">
+
+  <title>EcoBite | Smart Food Rescue Platform</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Top navigation -->
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="EcoBite home">
+      <span aria-hidden="true">🌿</span>
+      EcoBite
+    </a>
+
+    <span>Smart Food Rescue Platform</span>
+  </header>
+
+  <main class="container">
+
+    <!-- Welcome banner -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div>
+        <p class="eyebrow">GOOD FOOD. GREATER IMPACT.</p>
+
+        <h1 id="heroTitle">
+          Good food shouldn't go to waste.
+        </h1>
+
+        <p>
+          Bringing restaurants and communities together to rescue
+          surplus food, share meals, and make every bite count.
+        </p>
+      </div>
+
+      <div class="hero-icon" aria-hidden="true">
+        🥗
+      </div>
+    </section>
+
+    <!-- Impact dashboard -->
+    <section class="stats" aria-label="Food rescue statistics">
+
+      <article class="stat-card">
+        <span>Total listings</span>
+        <strong id="totalListings">0</strong>
+      </article>
+
+      <article class="stat-card">
+        <span>Meals available</span>
+        <strong id="availableMeals">0</strong>
+      </article>
+
+      <article class="stat-card">
+        <span>Meals donated</span>
+        <strong id="donatedMeals">0</strong>
+      </article>
+
+      <article class="stat-card">
+        <span>Food rescued (kg)*</span>
+        <strong id="rescuedKg">0</strong>
+      </article>
+
+    </section>
+
+    <!-- Add donation form -->
+    <section class="panel" aria-labelledby="formTitle">
+
+      <h2 id="formTitle">＋ Add a food donation</h2>
+
+      <p class="muted">
+        Have surplus food? List it here and help someone enjoy a meal.
+      </p>
+
+      <form id="foodForm">
+
+        <div class="form-grid">
+
+          <label for="foodName">
+            Food name
+            <input
+              type="text"
+              id="foodName"
+              name="foodName"
+              placeholder="e.g. Vegetable rice"
+              maxlength="60"
+              required
+            >
+          </label>
+
+          <label for="restaurant">
+            Restaurant name
+            <input
+              type="text"
+              id="restaurant"
+              name="restaurant"
+              placeholder="e.g. Green Kitchen"
+              maxlength="60"
+              required
+            >
+          </label>
+
+          <label for="quantity">
+            Quantity (meals)
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              placeholder="e.g. 25"
+              min="1"
+              max="10000"
+              step="1"
+              required
+            >
+          </label>
+
+          <label for="location">
+            Pickup location
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder="e.g. Indiranagar, Bengaluru"
+              maxlength="100"
+              required
+            >
+          </label>
+
+          <label for="deadline">
+            Pickup deadline
+            <input
+              type="datetime-local"
+              id="deadline"
+              name="deadline"
+              required
+            >
+          </label>
+
+          <label for="category">
+            Food category
+            <select id="category" name="category" required>
+              <option value="Cooked meals">🍲 Cooked meals</option>
+              <option value="Bakery">🥐 Bakery</option>
+              <option value="Fruits and vegetables">
+                🥦 Fruits and vegetables
+              </option>
+              <option value="Packaged food">📦 Packaged food</option>
+              <option value="Other">🍽️ Other</option>
+            </select>
+          </label>
+
+        </div>
+
+        <label class="checkbox-label" for="safeFood">
+          <input
+            type="checkbox"
+            id="safeFood"
+            name="safeFood"
+            required
+          >
+
+          <span>
+            I confirm that this food has been handled safely,
+            stored appropriately, and is suitable for donation.
+          </span>
+        </label>
+
+        <button class="primary-btn" type="submit">
+          <span aria-hidden="true">＋</span>
+          Add food listing
+        </button>
+
+      </form>
+    </section>
+
+    <!-- Donation management -->
+    <section class="panel" aria-labelledby="listingsTitle">
+
+      <div class="section-heading">
+        <div>
+          <h2 id="listingsTitle">Food rescue listings</h2>
+          <p class="muted">
+            Every listing is a chance to make a difference. 💚
+          </p>
+        </div>
+
+        <button
+          id="exportBtn"
+          class="secondary-btn"
+          type="button"
+        >
+          <span aria-hidden="true">↓</span>
+          Export CSV
+        </button>
+      </div>
+
+      <!-- Search and filters -->
+      <div class="filters">
+
+        <input
+          type="search"
+          id="searchInput"
+          aria-label="Search food donations"
+          placeholder="🔍 Search food, restaurant or location..."
+        >
+
+        <select
+          id="statusFilter"
+          aria-label="Filter by donation status"
+        >
+          <option value="All">All statuses</option>
+          <option value="Available">Available</option>
+          <option value="Reserved">Reserved</option>
+          <option value="Donated">Donated</option>
+        </select>
+
+        <select
+          id="categoryFilter"
+          aria-label="Filter by food category"
+        >
+          <option value="All">All categories</option>
+          <option value="Cooked meals">Cooked meals</option>
+          <option value="Bakery">Bakery</option>
+          <option value="Fruits and vegetables">
+            Fruits and vegetables
+          </option>
+          <option value="Packaged food">Packaged food</option>
+          <option value="Other">Other</option>
+        </select>
+
+      </div>
+
+      <!-- JavaScript inserts food cards here -->
+      <div
+        id="foodListings"
+        class="listing-grid"
+        aria-live="polite"
+      ></div>
+
+      <p id="emptyMessage" class="empty-message">
+        🌱 No food listings yet. Add your first donation and start
+        making an impact!
+      </p>
+
+    </section>
+
+    <!-- How it works -->
+    <section class="panel" aria-labelledby="howTitle">
+
+      <h2 id="howTitle">How EcoBite works</h2>
+
+      <p class="muted">
+        Three simple steps toward a world with less food waste.
+      </p>
+
+      <div class="steps-grid">
+
+        <article class="step-card">
+          <div class="step-icon" aria-hidden="true">🍱</div>
+          <h3>1. List surplus food</h3>
+          <p>
+            Restaurants share available food, quantities,
+            locations, and pickup deadlines.
+          </p>
+        </article>
+
+        <article class="step-card">
+          <div class="step-icon" aria-hidden="true">🤝</div>
+          <h3>2. Reserve a donation</h3>
+          <p>
+            A volunteer or recipient can coordinate a pickup
+            using the listed details.
+          </p>
+        </article>
+
+        <article class="step-card">
+          <div class="step-icon" aria-hidden="true">💚</div>
+          <h3>3. Make an impact</h3>
+          <p>
+            Track completed donations and estimate the meals
+            rescued from going to waste.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Sustainability message -->
+    <section class="impact-banner">
+      <div class="impact-icon" aria-hidden="true">🌍</div>
+
+      <div>
+        <h2>Small actions. A greener tomorrow.</h2>
+        <p>
+          Every meal shared is an opportunity to reduce waste
+          and support our community.
+        </p>
+      </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <footer class="footnote">
+      <p>
+        *Estimated rescued weight uses 0.4 kg per donated meal.
+        This is an illustrative estimate, not a measured weight.
+      </p>
+
+      <p>
+        EcoBite is a demonstration prototype. Listings are saved
+        in this browser only and are not shared between users.
+        Food safety and actual handover must be verified in practice.
+      </p>
+
+      <p>Made with 💚 for a more sustainable future.</p>
+    </footer>
+
+  </main>
+
+  <!-- Main JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+</html>
+
+
